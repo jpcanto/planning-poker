@@ -1,14 +1,14 @@
 <template>
   <v-app>
     <v-container v-if="!entered">
-      <v-form ref="form">
+      <v-form ref="form" @submit="updateUsername">
         <v-text-field
           v-model="userName"
           label="Apelido"
           required
         ></v-text-field>
 
-        <v-btn color="success" class="mr-4" @click="updateUsername">
+        <v-btn color="success" class="mr-4">
           Submit
         </v-btn>
       </v-form>
