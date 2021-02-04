@@ -49,6 +49,7 @@ export default {
       cards: Cards,
       entered: false,
       userName: "",
+      pokers: [{}],
       poker: { name: null, vote: 0 },
     };
   },
@@ -62,27 +63,19 @@ export default {
     },
     updateVote(size) {
       this.poker.vote = size;
+      this.pokers = [{ ...this.pokers, ...this.poker }];
     },
     sendVote() {
       firebase
         .database()
         .ref("poker")
-        .push(this.poker);
+        .set(this.pokers);
     },
   },
   mounted() {
-    const itemsRef = firebase.database().ref("messages");
+    const itemsRef = firebase.database().ref("poker");
     itemsRef.on("value", (snapshot) => {
-      const data = snapshot.val();
-      const messages = [];
-      Object.keys(data).forEach((key) => {
-        messages.push({
-          id: key,
-          username: data[key].username,
-          vote: data[key].vote,
-        });
-      });
-      this.messages = messages;
+      this.pokers = snapshot.val();
     });
   },
 };
