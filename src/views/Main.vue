@@ -1,32 +1,68 @@
 <template>
-  <div id="app">
-    <div class="login mt-5" v-if="!name">
-      <h3 class="mt-5">Join Chat</h3>
-      <label for="username">userName</label>
-      <br />
-      <input class="mb-3" type="text" v-model="userName" />
-      <br />
-      <button class="btn btn-primary" @click="updateUsername">Join Chat</button>
-    </div>
-    <div class="message-body mt-3" v-else>
-      <h3>Chat</h3>
-      <h5>Welcome {{ name }}!</h5>
-      <div class="card">
-        <div class="card-body">
-          <div
-            class="border pl-2 pt-1 ml-2 message-text mb-2"
-            v-for="message in messages"
-            :key="message"
-          >
-            <span class="mg-text">{{ message.username }}</span>
-            <p class="message pt-1">{{ message.text }}</p>
-          </div>
+  <v-card class="mx-auto my-12" max-width="374">
+    <template slot="progress">
+      <v-progress-linear
+        color="deep-purple"
+        height="10"
+        indeterminate
+      ></v-progress-linear>
+    </template>
+
+    <v-img
+      height="250"
+      src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+    ></v-img>
+
+    <v-card-title>Cafe Badilico</v-card-title>
+
+    <v-card-text>
+      <v-row align="center" class="mx-0">
+        <v-rating
+          :value="4.5"
+          color="amber"
+          dense
+          half-increments
+          readonly
+          size="14"
+        ></v-rating>
+
+        <div class="grey--text ml-4">
+          4.5 (413)
         </div>
+      </v-row>
+
+      <div class="my-4 subtitle-1">
+        $ • Italian, Cafe
       </div>
-      <input v-model="showMessage" type="text" class="mt-3 mr-2 pl-2 pr-2" />
-      <button class="btn btn-primary" @click="sendMessage">Send</button>
-    </div>
-  </div>
+
+      <div>
+        Small plates, salads sandwiches - an intimate setting with 12 indoor
+        seats plus patio seating.
+      </div>
+    </v-card-text>
+
+    <v-divider class="mx-4"></v-divider>
+
+    <v-card-title>Tonight's availability</v-card-title>
+
+    <v-card-text>
+      <v-chip-group active-class="deep-purple accent-4 white--text" column>
+        <v-chip>5:30PM</v-chip>
+
+        <v-chip>7:30PM</v-chip>
+
+        <v-chip>8:00PM</v-chip>
+
+        <v-chip>9:00PM</v-chip>
+      </v-chip-group>
+    </v-card-text>
+
+    <v-card-actions>
+      <v-btn color="deep-purple lighten-2" text>
+        Reserve
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
