@@ -8,7 +8,7 @@
           required
         ></v-text-field>
 
-        <v-btn color="success" class="mr-4">
+        <v-btn color="success" class="mr-4" @click="updateUsername">
           Submit
         </v-btn>
       </v-form>
@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import firebase from "../services/firebase";
 import { Cards } from "../data/cards";
 
 export default {
@@ -58,25 +57,8 @@ export default {
       if (this.userName !== "") {
         this.poker.name = this.userName;
         this.entered = true;
-        this.userName = "";
       }
-    },
-    updateVote(size) {
-      this.poker.vote = size;
-      this.pokers = [{ ...this.pokers, ...this.poker }];
-    },
-    sendVote() {
-      firebase
-        .database()
-        .ref("poker")
-        .set(this.pokers);
-    },
-  },
-  mounted() {
-    const itemsRef = firebase.database().ref("poker");
-    itemsRef.on("value", (snapshot) => {
-      this.pokers = snapshot.val();
-    });
-  },
+    }
+  }
 };
 </script>
